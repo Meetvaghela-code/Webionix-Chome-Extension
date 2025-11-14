@@ -5,7 +5,7 @@ A small developer demo that demonstrates a Chrome extension which sends the acti
 This repository contains two top-level parts:
 
 - `backend/` — Flask server and LangChain orchestration (document loading, splitting, FAISS vector store, embeddings, LLM invocation, structured parsing).
-- `extention/` — Chrome extension popup UI (HTML/CSS/JS) and `manifest.json`.
+- `extension/` — Chrome extension popup UI (HTML/CSS/JS) and `manifest.json`.
 
 This README explains how to set up and run the project, how the API works, useful development tips, and how to generate assets for the extension.
 
@@ -23,12 +23,12 @@ This README explains how to set up and run the project, how the API works, usefu
 
 ## Quick start (Windows / PowerShell)
 
-Open a PowerShell terminal and run the following from the project root (`d:\Chrome-extention`):
+Open a PowerShell terminal and run the following from the project root (`d:\Chrome-extension`):
 
 1. Create and activate a virtual environment
 
 ```powershell
-cd d:\Chrome-extention\backend
+cd d:\Chrome-extension\backend
 python -m venv .venv
 .\.venv\Scripts\Activate
 ```
@@ -113,30 +113,30 @@ If the server cannot produce structured output (parser missing or failed), it cu
 
 1. Open `chrome://extensions/` in Chrome.
 2. Toggle on "Developer mode" (top-right).
-3. Click "Load unpacked" and select the `extention/` folder inside the repository.
+3. Click "Load unpacked" and select the `extension/` folder inside the repository.
 4. Open any page, click the extension icon, type a question in the popup, and submit. The popup will POST to `http://127.0.0.1:5000/query`.
 
-Note: If your backend is running on a different host/port change the POST URL in `extention/popup.js` and adjust `manifest.json` host permissions.
+Note: If your backend is running on a different host/port change the POST URL in `extension/popup.js` and adjust `manifest.json` host permissions.
 
 ---
 
 ## Assets and icons
 
-The project includes an `extention/` folder for the browser UI. To create a modern-looking hero image and icon set I recommend generating assets with an image generator (Midjourney / SDXL / DALL·E) using the prompts provided in the repo history. Suggested icon filenames and sizes:
+The project includes an `extension/` folder for the browser UI. To create a modern-looking hero image and icon set I recommend generating assets with an image generator (Midjourney / SDXL / DALL·E) using the prompts provided in the repo history. Suggested icon filenames and sizes:
 
-- `extention/icons/icon-512.png` (512x512, store)
-- `extention/icons/icon-128.png` (128x128)
-- `extention/icons/icon-48.png` (48x48)
-- `extention/icons/icon-32.png` (32x32)
-- `extention/icons/icon-16.png` (16x16)
-- `extention/icons/icon.svg` (master vector)
+- `extension/icons/icon-512.png` (512x512, store)
+- `extension/icons/icon-128.png` (128x128)
+- `extension/icons/icon-48.png` (48x48)
+- `extension/icons/icon-32.png` (32x32)
+- `extension/icons/icon-16.png` (16x16)
+- `extension/icons/icon.svg` (master vector)
 
 Color palette suggestion:
 - Primary teal: `#0F9D98`
 - Deep navy: `#053F5E`
 - Lime accent: `#C8FF6A`
 
-If you'd like, I can generate simple programmatic SVG icon files and add them into `extention/icons/` for immediate use — tell me your preferred style (flat/rounded/monochrome).
+If you'd like, I can generate simple programmatic SVG icon files and add them into `extension/icons/` for immediate use — tell me your preferred style (flat/rounded/monochrome).
 
 ---
 
@@ -155,9 +155,9 @@ If you make changes and want to contribute back:
 
 - `backend/server.py` — main Flask app and LangChain orchestration
 - `backend/requirements.txt` — Python dependencies
-- `extention/popup.html` — extension popup UI
-- `extention/popup.js` — extension popup behavior and code
-- `extention/manifest.json` — extension manifest and permissions
+- `extension/popup.html` — extension popup UI
+- `extension/popup.js` — extension popup behavior and code
+- `extension/manifest.json` — extension manifest and permissions
 
 ---
 
@@ -168,7 +168,7 @@ This project does not include a license file. Add a license of your choice (MIT,
 ---
 
 If you want, I can now:
-- add a simple programmatic SVG icon set into `extention/icons/`, or
+- add a simple programmatic SVG icon set into `extension/icons/`, or
 - add an alternative path that re-enables the simple text fallback for `/query`, or
 - prepare step-by-step publishing notes to upload the extension to the Chrome Web Store.
 
