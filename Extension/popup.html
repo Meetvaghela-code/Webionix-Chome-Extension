@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terminal Q&A</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <style>
+        /* TERMINAL THEME */
+        :root {
+            --terminal-bg: #0d0d0d;
+            --terminal-border: #1a1a1a;
+            --terminal-text: #e6e6e6;
+            --terminal-green: #4af626;
+            --terminal-glow: rgba(74, 246, 38, 0.35);
+        }
+
+        body, html {
+            background: var(--terminal-bg);
+            color: var(--terminal-text);
+            font-family: 'Menlo', 'Consolas', monospace;
+            margin: 0;
+            padding: 0;
+            width: 420px;
+            overflow-x: hidden;
+        }
+
+        .terminal-card {
+            background: var(--terminal-bg);
+            border: 2px solid var(--terminal-border);
+            border-radius: 12px;
+            padding: 0;
+            box-shadow: 0 0 25px var(--terminal-glow);
+        }
+
+        .terminal-header {
+            background: #111;
+            padding: 8px 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 2px solid var(--terminal-border);
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background: #ff5f56; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #27c93f; }
+
+        .terminal-body {
+            padding: 16px;
+            background: #0d0d0d;
+            min-height: 150px;
+            font-size: 14px;
+            color: var(--terminal-green);
+            text-shadow: 0 0 4px var(--terminal-glow);
+            position: relative;
+        }
+
+        .input-area textarea {
+            background: #111;
+            color: var(--terminal-text);
+            border: 2px solid var(--terminal-border);
+            font-family: monospace;
+            resize: none;
+        }
+
+        .styled-btn {
+            border: 2px solid var(--terminal-green);
+            background: transparent;
+            color: var(--terminal-green);
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: all 0.2s;
+        }
+
+        .styled-btn:hover {
+            background: var(--terminal-green);
+            color: #000;
+            box-shadow: 0 0 8px var(--terminal-green);
+        }
+
+        #url-display {
+            background: #111;
+            color: #ccc;
+            border: 1px solid #222;
+        }
+
+        /* Scanline effect */
+        .scanlines::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: repeating-linear-gradient(
+                to bottom,
+                rgba(255,255,255,0.03) 0px,
+                rgba(255,255,255,0.03) 1px,
+                transparent 2px,
+                transparent 3px
+            );
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        /* Blinking cursor */
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 14px;
+            background: var(--terminal-green);
+            margin-left: 4px;
+            animation: blink 0.8s infinite;
+        }
+
+        @keyframes blink {
+            0%,50% { opacity: 1; }
+            50.01%,100% { opacity: 0; }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="p-3">
+    <div class="terminal-card">
+
+        <div class="terminal-header">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+            <span class="ms-2 text-secondary">WEBPAGE Q&A TERMINAL</span>
+        </div>
+
+        <div class="p-3">
+            <div id="status-alert" class="alert alert-danger py-2 mb-3" style="display:none;font-size:13px"></div>
+
+            <label class="form-label small">Active Page</label>
+            <div class="input-group mb-3">
+                <input id="url-display" class="form-control form-control-sm" readonly />
+                <button class="btn btn-dark btn-sm" id="copy-url-btn"><i class="bi bi-clipboard"></i></button>
+            </div>
+
+            <label class="form-label">Ask Terminal</label>
+            <div class="input-area mb-3">
+                <textarea id="question-input" class="form-control" rows="3" placeholder="> What is this page about?"></textarea>
+            </div>
+
+            <div class="d-flex gap-2">
+                <button class="styled-btn flex-grow-1" id="submit-button">EXECUTE</button>
+                <button class="styled-btn" id="clear-button">CLEAR</button>
+            </div>
+
+            <div class="mt-3">
+                <label class="form-label small">Output</label>
+
+                <div id="result-wrapper" class="terminal-body position-relative scanlines">
+                    <div id="overlay" class="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center" style="display:none; background:rgba(0,0,0,0.4);">
+                        <div class="glass text-center p-3 bg-dark rounded">
+                            <div class="spinner-border text-success"></div>
+                            <!-- <div class="mt-2" style="font-size:12px;color:#4af626;">Processing...</div> -->
+                        </div>
+                    </div>
+
+                    <div id="result"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>

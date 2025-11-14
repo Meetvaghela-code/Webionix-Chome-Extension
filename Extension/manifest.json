@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Webionix",
+  "version": "1.0",
+  "description": "Ask questions about the current webpage using LangChain.",
+  "permissions": [
+    "activeTab",
+    "clipboardWrite"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "host_permissions": [
+    "http://127.0.0.1:5000/*"
+  ],
+  "icons": {
+    "48": "icons/ico_new.png"
+  }
+}
