@@ -1,3 +1,5 @@
+<img width="619" height="760" alt="image" src="https://github.com/user-attachments/assets/b20ea1ed-c530-45d3-8324-8d0577d2dba1" />
+
 # Chrome Extension + Local Flask AI Backend
 
 A small developer demo that demonstrates a Chrome extension which sends the active tab URL and a question to a local Flask backend. The backend fetches the web page, creates embeddings (using a local Hugging Face model), runs a RetrievalQA flow against an LLM, and returns a cleaned, structured result back to the extension popup.
